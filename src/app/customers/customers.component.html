@@ -1,0 +1,64 @@
+<div class="cont-cli">
+  <h3 class="text-center mb-4">Clientes</h3>
+  <form (ngSubmit)="newCustomer(newCustomerForm.value)" [formGroup]="newCustomerForm" class="text-left border border-light p-4">
+    <input type="hidden" formControlName="id">
+  
+    <div class="form-row ">
+      <div class="col">
+        <label for="nombres">Nombres</label>
+        <input type="text" name="nombres" formControlName="nombres" class="form-control">
+      </div>
+      <div class="col">
+        <label for="apellidos">Apellidos</label>
+        <input type="text" name="apellidos" formControlName="apellidos" class="form-control">
+      </div>
+    </div>
+    
+    <div class="form-row ">
+      <div class="col">
+        <label for="cumpleanos">Fecha de Nacimiento</label>
+        <input type="date"  name="cumpleanos" formControlName="cumpleanos">
+      </div>
+      <div class="col">
+        <label for="edad">Edad</label>
+        <!--<input readonly type="number" placeholder="0" formControlName="edad">-->
+        <input type="number" placeholder="0" formControlName="edad"/>
+      </div>
+      <div class="col">
+        <input type="submit" class="btn--blue btn--add .btn-block" [disabled]="!newCustomerForm.valid" [value]="(currentStatus == 1) ? 'Agregar' : 'Guardar'">
+      </div>
+    </div>
+
+  </form>
+  <table mdbTable small="true">
+    <thead>
+      <tr>
+        <!--<th scope="col">id</th>-->
+        <th scope="col">Nombres y Apellidos</th>
+        <th scope="col">Edad</th>
+        <th scope="col">Fecha de Nacimiento</th>
+        <th scope="col">Editar</th>
+        <th scope="col">Eliminar</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr mdbTableCol *ngFor="let customer of customers">
+        <!--<td >{{customer.data.id}}</td>-->
+        <td>{{customer.data.nombres}} {{customer.data.apellidos}}</td>
+        <td>{{customer.data.edad}}</td>
+        <td>{{customer.data.cumpleanos}}</td>
+        <td><button class="btn--green btn--s btn1" (click)="editCustomer(customer.id)">Editar</button></td>
+        <td><button class="btn--red btn--s btn2" (click)="deleteCustomer(customer.id)">Eliminar</button></td>
+        
+      </tr>
+      
+      <tr mdbTableCol>
+        <td class="text-right p-4"><b>EDAD PROMEDIO :</b> </td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+</div>

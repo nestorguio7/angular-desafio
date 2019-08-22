@@ -1,0 +1,38 @@
+.cont-cli{
+  width: 800px;
+  margin: 0 auto ;
+}
+form{
+  margin: 0 0 25px;
+}
+table {
+  width: 100%;
+}
+table th {
+  border-bottom:solid 1px  #3498db;
+  color:#3498db;
+  padding: 5px 2px;
+  font-size: 0.821rem;
+  font-variant: inherit;
+  font-weight: nromal;
+}
+table tr:last-child{
+  border-top:solid 1px  #3498db;
+}
+table tbody tr:first-child {
+  padding: 20px 0 0 0;
+}
+.btn--add{
+  margin: 2.114rem 0 0 0;
+}
+
+@media (max-width: 600px) {
+  .cont-cli{
+    width: 400px;
+    margin: 0 auto;
+  }
+  table th,
+  table td{
+    text-align: center;
+  }
+}
