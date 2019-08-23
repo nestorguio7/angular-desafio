@@ -12,6 +12,7 @@ export class CustomersComponent implements OnInit {
   public documentId = null;
   public customers = [];
   public currentStatus = 1;
+  sumapromedio
 
   public newCustomerForm = new FormGroup({
     nombres: new FormControl('', Validators.required),
@@ -40,8 +41,16 @@ export class CustomersComponent implements OnInit {
           data: customersData.payload.doc.data()
         });
       })
-      
+      this.sumapromedio = this.sumar(this.customers)
     });
+  }
+
+  sumar(users){
+    let suma:number=0
+    for(let i=0;i<users.length;i++){
+      suma += users[i].data.edad
+    } 
+    return Math.round(suma*1/users.length)
   }
 
   public newCustomer(form, documentId = this.documentId) {
