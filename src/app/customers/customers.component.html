@@ -17,12 +17,12 @@
     <div class="form-row ">
       <div class="col">
         <label for="cumpleanos">Fecha de Nacimiento</label>
-        <input type="date"  name="cumpleanos" formControlName="cumpleanos">
+        <input type="date"  name="cumpleanos" formControlName="cumpleanos" (change)="mostrarEdad($event)">
       </div>
       <div class="col">
         <label for="edad">Edad</label>
-        <!--<input readonly type="number" placeholder="0" formControlName="edad">-->
-        <input type="number" placeholder="0" formControlName="edad"/>
+        <input readonly type="number" placeholder="0" formControlName="edad" value="{{mostrarEdad}}">
+        <!--<input type="number" placeholder="0" formControlName="edad"/>-->
       </div>
       <div class="col">
         <input type="submit" class="btn--blue btn--add .btn-block" [disabled]="!newCustomerForm.valid" [value]="(currentStatus == 1) ? 'Agregar' : 'Guardar'">
