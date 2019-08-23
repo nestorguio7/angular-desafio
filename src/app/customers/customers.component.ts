@@ -13,12 +13,13 @@ export class CustomersComponent implements OnInit {
   public customers = [];
   public currentStatus = 1;
   sumapromedio
+  edadObtenida
 
   public newCustomerForm = new FormGroup({
     nombres: new FormControl('', Validators.required),
     apellidos: new FormControl('', Validators.required),
-    edad: new FormControl('', Validators.required),
     cumpleanos: new FormControl('', Validators.required),
+    edad: new FormControl(''),
     id: new FormControl('')
   });
 
@@ -53,23 +54,12 @@ export class CustomersComponent implements OnInit {
     return Math.round(suma*1/users.length)
   }
   mostrarEdad(val): number {
-    const myDate = val.target.value;
-    const myDate2 = myDate.split("-");
-    const newDate = myDate2[0]+"/"+myDate2[1]+"/"+myDate2[2];
-    const newDate2 = new Date(newDate).getTime()
-    console.log("mostrar edad: ", newDate2 )
-    console.log("paso: ",Date.now())
-
-    if (val.target.value) {
-        var timeDiff = Math.abs(Date.now() - newDate2);
-        console.log("timeDiff: ",timeDiff)
-        console.log("math: ", (Math.ceil((timeDiff / (1000 * 3600 * 24)) / 365))-1)
-        return (Math.ceil((timeDiff / (1000 * 3600 * 24)) / 365))-1;
-    } else {
-        return null;
-    }
+    const anoSelect = (val.target.value).split('-')[0],
+    anoActual = new Date()
+    this.edadObtenida = anoActual.getFullYear() - anoSelect
     //return ~~((Date.now() - newDate2 || Date.now()) / (24 * 3600 * 365.25 * 1000));
   }
+
   public newCustomer(form, documentId = this.documentId) {
     console.log(`Status: ${this.currentStatus}`);
     if (this.currentStatus == 1) {
