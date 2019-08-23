@@ -22,7 +22,6 @@
       <div class="col">
         <label for="edad">Edad</label>
         <input readonly type="number" placeholder="0" formControlName="edad" value="{{edadObtenida}}">
-        <!--<input type="number" placeholder="0" formControlName="edad"/>-->
       </div>
       <div class="col">
         <input type="submit" class="btn--blue btn--add .btn-block" [disabled]="!newCustomerForm.valid" [value]="(currentStatus == 1) ? 'Agregar' : 'Guardar'">
@@ -33,7 +32,6 @@
   <table mdbTable small="true">
     <thead>
       <tr>
-        <!--<th scope="col">id</th>-->
         <th scope="col">Nombres y Apellidos</th>
         <th scope="col">Edad</th>
         <th scope="col">Fecha de Nacimiento</th>
@@ -43,20 +41,18 @@
     </thead>
     <tbody>
       <tr mdbTableCol *ngFor="let customer of customers">
-        <!--<td >{{customer.data.id}}</td>-->
         <td>{{customer.data.nombres}} {{customer.data.apellidos}}</td>
         <td>{{customer.data.edad}}</td>
         <td>{{customer.data.cumpleanos}}</td>
         <td><button class="btn--green btn--s btn1" (click)="editCustomer(customer.id)">Editar</button></td>
         <td><button class="btn--red btn--s btn2" (click)="deleteCustomer(customer.id)">Eliminar</button></td>
-        
       </tr>
       
       <tr mdbTableCol>
         <td class="text-right p-4"><b>EDAD PROMEDIO :</b> </td>
         <td>{{sumapromedio}}</td>
-        <td></td>
-        <td></td>
+        <td class="text-right p-4"><b>Promedio de Vida :</b> </td>
+        <td>{{varianza}}</td>
         <td></td>
       </tr>
     </tbody>

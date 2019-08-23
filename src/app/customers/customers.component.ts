@@ -14,6 +14,7 @@ export class CustomersComponent implements OnInit {
   public currentStatus = 1;
   sumapromedio
   edadObtenida
+  varianza
 
   public newCustomerForm = new FormGroup({
     nombres: new FormControl('', Validators.required),
@@ -43,22 +44,53 @@ export class CustomersComponent implements OnInit {
         });
       })
       this.sumapromedio = this.sumar(this.customers)
+      this.varianza = this.ds(this.customers)
     });
   }
 
   sumar(users){
     let suma:number=0
     for(let i=0;i<users.length;i++){
-      suma += users[i].data.edad
+      suma += +users[i].data.edad
+      console.log("suma: ",suma)
     } 
     return Math.round(suma*1/users.length)
   }
+  
+  ds(num){
+    var varian:number=0
+    var varianSuma:number=0
+    var n = num.length
+    var varianza
+    var desviacion
+    var desviacionMaxima
+    var edadPromedioMuerte
+    for(let i=0;i<num.length;i++){
+      varian = num[i].data.edad - this.sumapromedio
+      varianSuma += Math.pow(varian, 2)
+      console.log("--------------------------------")
+      console.log("this.sumapromedio: ",this.sumapromedio)
+      console.log("+num[i]: ",num[i].data.edad)
+      console.log("varian: ",varian)
+      console.log("varianSuma: ",varianSuma)
+    } 
+    console.log("~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~")
+    console.log("Math.round(varianSuma): ",Math.round(varianSuma))
+    console.log("n:", n)
+    console.log("varianza:", Math.round(varianSuma)/n-1)
+    varianza = Math.round(Math.round(varianSuma)/(n-1))
+    desviacion = Math.round(Math.sqrt(varianza))
+    desviacionMaxima = this.sumapromedio - desviacion
+    edadPromedioMuerte = this.sumapromedio + desviacionMaxima
+    return edadPromedioMuerte
+  }
+
   mostrarEdad(val): number {
     const anoSelect = (val.target.value).split('-')[0],
     anoActual = new Date()
     this.edadObtenida = anoActual.getFullYear() - anoSelect
-    //return ~~((Date.now() - newDate2 || Date.now()) / (24 * 3600 * 365.25 * 1000));
   }
+  
 
   public newCustomer(form, documentId = this.documentId) {
     console.log(`Status: ${this.currentStatus}`);
@@ -66,7 +98,7 @@ export class CustomersComponent implements OnInit {
       let data = {
         nombres: form.nombres,
         apellidos: form.apellidos,
-        edad: form.edad,
+        edad: this.edadObtenida,
         cumpleanos: form.cumpleanos,
         id:form.id
       }
@@ -86,7 +118,7 @@ export class CustomersComponent implements OnInit {
       let data = {
         nombres: form.nombres,
         apellidos: form.apellidos,
-        edad: form.edad,
+        edad: this.edadObtenida,
         cumpleanos: form.cumpleanos,
         id:form.id
       }
