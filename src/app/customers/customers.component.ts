@@ -80,8 +80,8 @@ export class CustomersComponent implements OnInit {
     console.log("varianza:", Math.round(varianSuma)/n-1)
     varianza = Math.round(Math.round(varianSuma)/(n-1))
     desviacion = Math.round(Math.sqrt(varianza))
-    //desviacionMaxima = this.sumapromedio - desviacion
-    edadPromedioMuerte = this.sumapromedio + varianza
+    desviacionMaxima = this.sumapromedio - desviacion
+    edadPromedioMuerte = this.sumapromedio + desviacionMaxima
     return edadPromedioMuerte
   }
 
