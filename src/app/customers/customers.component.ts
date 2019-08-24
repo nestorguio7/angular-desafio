@@ -15,6 +15,7 @@ export class CustomersComponent implements OnInit {
   sumapromedio
   edadObtenida
   varianza
+  
 
   public newCustomerForm = new FormGroup({
     nombres: new FormControl('', Validators.required),
@@ -75,13 +76,16 @@ export class CustomersComponent implements OnInit {
       console.log("varianSuma: ",varianSuma)
     } 
     console.log("~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~")
-    console.log("Math.round(varianSuma): ",Math.round(varianSuma))
+    console.log("suma total: ",Math.round(varianSuma))
     console.log("n:", n)
-    console.log("varianza:", Math.round(varianSuma)/n-1)
     varianza = Math.round(Math.round(varianSuma)/(n-1))
+    console.log("varianza:", Math.round(varianSuma)/(n-1))
     desviacion = Math.round(Math.sqrt(varianza))
+    console.log("desviacion:", desviacion)
     desviacionMaxima = this.sumapromedio - desviacion
-    edadPromedioMuerte = this.sumapromedio + desviacionMaxima
+    console.log("desviacionMaxima:", desviacionMaxima)
+    edadPromedioMuerte = this.sumapromedio + desviacion + desviacionMaxima
+    console.log("edadPromedioMuerte:", edadPromedioMuerte)
     return edadPromedioMuerte
   }
 
